@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>LoginRegistration.qml</file>
+        <file>main.qml</file>
+        <file>mainMapPage.qml</file>
+        <file>provodnik.png</file>
+        <file>users.sqlite</file>
+    </qresource>
+</RCC>
