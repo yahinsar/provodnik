@@ -8,12 +8,12 @@ Page {
     //color: "lightgrey"
 
     Image {
-        source: "provodnik.png"
+        source: "provodnikWithoutBackgroundColor.png"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
-        width: 100
-        height: 100
+        width: 400
+        height: 400
     }
 
     ColumnLayout {
