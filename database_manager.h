@@ -41,7 +41,7 @@ public slots:
     bool checkUser(const QString& phoneNumber);
     bool saveUserInfo(const QString &firstName, const QString &lastName, const QString &middleName,
                       const QString &phone, const QString &email);
-    QVector<ChargingStationInfo> getChargingStationsInfo(int stationNumber);
+    QVariantList getChargingStationsInfo(int stationID);
 };
 
 #endif // DATABASE_MANAGER_H

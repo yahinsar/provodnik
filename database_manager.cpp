@@ -132,47 +132,55 @@ bool DatabaseManager::checkUser(const QString& phoneNumber) {
     }
 }
 
-QVector<ChargingStationInfo> DatabaseManager::getChargingStationsInfo(int stationID) {
-    QVector<ChargingStationInfo> stationsInfo;
+QVariantList DatabaseManager::getChargingStationsInfo(int stationID) {
+    QVariantList stationsInfo;
 
     QSqlQuery query;
-    query.prepare("SELECT ChargingStations.StationNumber, "
+    query.prepare("SELECT ChargingStations.ID, ChargingStations.StationNumber, "
                   "ChargingPorts.ID, PortTypes.TypeName, PortTypes.ConnectorImage, "
                   "ChargingPorts.Power, ChargingPorts.IsCharging, ChargingPorts.LastChargeStart "
                   "FROM ChargingStations "
-                  "INNER JOIN ChargingPorts ON ChargingStations.ID = ChargingPorts.ChargingStationID "
+                  "INNER JOIN ChargingPorts ON ChargingStations.ID = ChargingPorts.StationID "
                   "INNER JOIN PortTypes ON ChargingPorts.PortType = PortTypes.ID "
                   "WHERE ChargingStations.ElectricStationID = :stationID");
     query.bindValue(":stationID", stationID);
     if (query.exec()) {
-        ChargingStationInfo station;
-        QString currentStationNumber;
+        QMap<int, QVariantMap> stationsMap;
+
         while (query.next()) {
-            QString stationNumber = query.value(0).toString();
-            if (stationNumber != currentStationNumber) {
-                if (!currentStationNumber.isEmpty())
-                    stationsInfo.append(station);
-                currentStationNumber = stationNumber;
-                station.stationNumber = stationNumber;
-                station.ports.clear();
+            int stationID = query.value(0).toInt();
+            QString stationNumber = query.value(1).toString();
+
+            if (!stationsMap.contains(stationID)) {
+                QVariantMap stationMap;
+                stationMap["stationID"] = stationID;
+                stationMap["stationNumber"] = stationNumber;
+                stationMap["ports"] = QVariantList();
+                stationsMap.insert(stationID, stationMap);
             }
-            ChargingPortInfo portInfo;
-            portInfo.portNumber = query.value(1).toInt();
-            portInfo.typeName = query.value(2).toString();
-            portInfo.connectorImage = query.value(3).toString();
-            portInfo.power = query.value(4).toInt();
-            bool isCharging = query.value(5).toBool();
+
+            QVariantMap portMap;
+            portMap["portNumber"] = query.value(2).toInt();
+            portMap["typeName"] = query.value(3).toString();
+            portMap["connectorImage"] = query.value(4).toString();
+            portMap["power"] = query.value(5).toInt();
+            bool isCharging = query.value(6).toBool();
             if (isCharging) {
-                portInfo.status = "Зарядка";
-                portInfo.lastChargeStart = query.value(6).toString();
+                portMap["status"] = "Зарядка";
+                portMap["lastChargeStart"] = query.value(7).toString();
             } else {
-                portInfo.status = "Свободно";
-                portInfo.lastChargeStart = "";
+                portMap["status"] = "Свободно";
+                portMap["lastChargeStart"] = "";
             }
-            station.ports.append(portInfo);
+
+            QVariantList portsList = stationsMap.value(stationID)["ports"].toList();
+            portsList.append(portMap);
+            stationsMap[stationID]["ports"] = portsList;
         }
-        if (!currentStationNumber.isEmpty())
-            stationsInfo.append(station);
+
+        for (const QVariantMap &stationMap : stationsMap) {
+            stationsInfo.append(stationMap);
+        }
     }
 
     return stationsInfo;

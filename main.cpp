@@ -14,10 +14,12 @@ int main(int argc, char *argv[])
 
     DatabaseManager databaseManager;
 
+    qmlRegisterType<DatabaseManager>("MyApp", 1, 0, "DatabaseManager");
+
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("databaseManager", &databaseManager);
 
-    if (!databaseManager.openDatabase("E:/Qt_projects/provodnik/newInfo.sqlite")) {
+    if (!databaseManager.openDatabase("E:/Qt_projects/provodnik/stInfo.db")) {
         qDebug() << "Failed to open database.";
         return -1;
     }
