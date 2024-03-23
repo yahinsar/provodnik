@@ -70,7 +70,7 @@ Page {
                             personalInfoForm.visible = true; // Показываем форму для заполнения личной информации
                         }
                         else {
-                            stackView.push("mainMapPage.qml");
+                            stackView.push("mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumberInput.text)});
                             //stackView.pop(); // Убираем экран входа/регистрации из стека
                         }
                     }

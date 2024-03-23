@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
     main.qml
     LoginRegistration.qml
     provodnik.png
+    iconButton.qml
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -34,9 +35,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         mainMapPage.qml
         qml.qrc
         CustomPage.qml
-        marker_red.png marker_blue.png scale.png scale_end.png
+        marker_red.png marker_blue.png
         RouteCoordinate.qml RouteCoordinateForm.ui.qml
         stationInfo.qml
+        userRefillPage.qml
+        CustomButton.qml
+        iconButton.qml
+        profilePage.qml
     )
 else()
     if(ANDROID)

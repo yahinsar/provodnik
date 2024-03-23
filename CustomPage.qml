@@ -13,7 +13,6 @@ Page {
 
     ToolBar {
         id: header
-        // Добавьте заголовок страницы, кнопку "Назад" и другие элементы
     }
 
     Item {
@@ -24,8 +23,6 @@ Page {
             top: header.bottom
             bottom: parent.bottom
         }
-        // Поместите содержимое страницы в этот Item
-        // Можно привязать к pageContent
         Item {
             anchors.fill: parent
             visible: !!pageContent

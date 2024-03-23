@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("databaseManager", &databaseManager);
 
-    if (!databaseManager.openDatabase("E:/Qt_projects/provodnik/stInfo.db")) {
+    if (!databaseManager.openDatabase("E:/Qt_projects/provodnik/infoS.db")) {
         qDebug() << "Failed to open database.";
         return -1;
     }

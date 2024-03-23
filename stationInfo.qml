@@ -14,23 +14,9 @@ Rectangle {
         listView.model = stationsInfo;
     }
 
-    Row {
-        id: row
-        spacing: 10
-
-        Button {
-            text: "Back"
-            onClicked: stackView.pop()
-        }
-
-        Text {
-            text: "This stationInfo.qml was launched from " + markerType
-        }
-    }
-
     ListView {
         id: listView
-        anchors.top: row.bottom
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -56,6 +42,7 @@ Rectangle {
                 }
                 border.color: "black"
                 border.width: 1
+                anchors.top: backButton.bottom
                 Column {
                     spacing: 5
 
@@ -165,6 +152,16 @@ Rectangle {
                 }
             }
         }
+
+        Button {
+            id: backButton
+            //text: "Back"
+            onClicked: stackView.pop()
+            icon.source: "back.png"
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+        }
+
     }
 
 

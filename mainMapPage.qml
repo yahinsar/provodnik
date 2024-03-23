@@ -9,6 +9,7 @@ Rectangle {
     height: parent.height
     property bool visibleMyCoordinates: false
     property var userCoordinate: QtPositioning.coordinate(51.523118, 46.019991)
+    property int userID: 0
     //property alias routeQuery: routeQuery
     //property alias routeModel: routeModel
 
@@ -89,13 +90,13 @@ Rectangle {
         MapQuickItem {
             id: marker1Item
             coordinate: QtPositioning.coordinate(51.526777, 46.017251)
-            anchorPoint.x: marker.width / 2
-            anchorPoint.y: marker.height * 2
+            anchorPoint.x: marker1.width / 2
+            anchorPoint.y: marker1.height * 2
             sourceItem: Image {
                 id: marker1
-                source: "marker_blue.png" // Путь к изображению метки
-                width: 24
-                height: 24
+                source: "station_marker.png" // Путь к изображению метки
+                width: 36 * map.zoomLevel / 12
+                height: 36 * map.zoomLevel / 12
             }
             MouseArea {
                     anchors.fill: parent
@@ -108,13 +109,13 @@ Rectangle {
         MapQuickItem {
             id: marker2Item
             coordinate: QtPositioning.coordinate(51.522031, 46.019659)
-            anchorPoint.x: marker.width / 2
-            anchorPoint.y: marker.height * 2
+            anchorPoint.x: marker2.width / 2
+            anchorPoint.y: marker2.height * 2
             sourceItem: Image {
                 id: marker2
-                source: "marker_blue.png" // Путь к изображению метки
-                width: 24 * map.zoomLevel / 12
-                height: 24 * map.zoomLevel / 12
+                source: "station_marker.png" // Путь к изображению метки
+                width: 36 * map.zoomLevel / 12
+                height: 36 * map.zoomLevel / 12
             }
             MouseArea {
                     anchors.fill: parent
@@ -127,13 +128,13 @@ Rectangle {
         MapQuickItem {
             id: marker3Item
             coordinate: QtPositioning.coordinate(51.513254, 45.949231)
-            anchorPoint.x: marker.width / 2
-            anchorPoint.y: marker.height * 2
+            anchorPoint.x: marker3.width / 2
+            anchorPoint.y: marker3.height * 2
             sourceItem: Image {
                 id: marker3
-                source: "marker_blue.png" // Путь к изображению метки
-                width: 24
-                height: 24
+                source: "station_marker.png" // Путь к изображению метки
+                width: 36 * map.zoomLevel / 12
+                height: 36 * map.zoomLevel / 12
             }
             MouseArea {
                     anchors.fill: parent
@@ -151,9 +152,9 @@ Rectangle {
                     anchorPoint.y: marker.height * 2
                     sourceItem: Image {
                         id: marker
-                        source: "marker_red.png" // Путь к изображению метки
-                        width: 24
-                        height: 24
+                        source: "my_marker.png" // Путь к изображению метки
+                        width: 36 * map.zoomLevel / 12
+                        height: 36 * map.zoomLevel / 12
                     }
                 }
         //! [marker]
@@ -208,16 +209,26 @@ Rectangle {
 
     Row {
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        spacing: 5
         Button {
-            text: "Reset View"
+            //text: "Reset View"
             onClicked: {
                 map.center = QtPositioning.coordinate(51.52, 46.03);
                 map.zoomLevel = 12;
             }
+            icon.source: "reset.png"
+            background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.width: 2
+                    border.color: "#000000"
+                }
         }
 
         Button {
-            text: "Мое местоположение"
+            //text: "Мое местоположение"
+            property bool isPressed: false
             onClicked: {
                 visibleMyCoordinates = !visibleMyCoordinates;
                 if (positionSource.valid) {
@@ -227,11 +238,26 @@ Rectangle {
                 }
                 map.center = userCoordinate
                 map.zoomLevel = 14;
+                if (isPressed) {
+                            background.color = "#FFFFFF";
+                        } else {
+                            background.color = "#CCCCCC";
+                        }
+                        isPressed = !isPressed;
             }
+            icon.source: "my-location.png"
+            property color originalBackgroundColor: "#FFFFFF"
+            background: Rectangle {
+                    color: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
+                    radius: 10
+                    border.width: 2
+                    border.color: "#000000"
+                }
         }
 
         Button {
-            text: "Построить путь"
+            //text: "Построить путь"
+            property bool isPressed: false
             onClicked: {
                 // Находим ближайшую синюю метку
                 var nearestMarker = marker1;
@@ -256,7 +282,49 @@ Rectangle {
                 routeQuery.travelModes = RouteQuery.CarTravel;
                 routeQuery.routeOptimizations = RouteQuery.FastestRoute;
                 routeModel.update();
+                if (isPressed) {
+                            background.color = "#FFFFFF";
+                        } else {
+                            background.color = "#CCCCCC";
+                        }
+                        isPressed = !isPressed;
             }
+            icon.source: "route.png"
+            property color originalBackgroundColor: "#FFFFFF"
+            background: Rectangle {
+                    color: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
+                    radius: 10
+                    border.width: 2
+                    border.color: "#000000"
+                }
+        }
+
+        Button {
+            //text: "Текущая зарядка"
+            onClicked: {
+                stackView.push("userRefillPage.qml", {userID: userID});
+            }
+            icon.source: "electric.png"
+            background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.width: 2
+                    border.color: "#000000"
+                }
+        }
+
+        Button {
+            //text: "Текущая зарядка"
+            onClicked: {
+                stackView.push("profilePage.qml", {userID: userID});
+            }
+            icon.source: "profile.png"
+            background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.width: 2
+                    border.color: "#000000"
+                }
         }
     }
 
@@ -279,7 +347,7 @@ Rectangle {
 
         for (var i = 0; i < map.markers.length; i++) {
             var marker = map.markers[i];
-            if (marker.sourceItem.source === "marker_blue.png") {
+            if (marker.sourceItem.source === "station_marker.png") {
                 var distance = userCoordinate.distanceTo(marker.coordinate);
                 if (distance < closestDistance) {
                     closestMarker = marker;

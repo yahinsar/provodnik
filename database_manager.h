@@ -42,6 +42,14 @@ public slots:
     bool saveUserInfo(const QString &firstName, const QString &lastName, const QString &middleName,
                       const QString &phone, const QString &email);
     QVariantList getChargingStationsInfo(int stationID);
+    int getUserIDByPhoneNumber(const QString &phoneNumber);
+    QVariantList getUnpaidRefillsInfo(int userID);
+    QVariantMap getCarInfoByID(int carID);
+    QVariantMap getPortTypeInfo(int portType);
+    QVariantMap getUserInfoByID(int userID);
+    bool updateUserInfo(int userID, const QString &firstName, const QString &lastName,
+                                         const QString &middleName, const QString &phone,
+                                         const QString &email);
 };
 
 #endif // DATABASE_MANAGER_H
