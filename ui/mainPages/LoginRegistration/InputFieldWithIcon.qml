@@ -8,10 +8,10 @@ TextField {
     property string startText: ""
     width: parent.width
     placeholderText: startText
-    placeholderTextColor: mainTextCOlor
+    placeholderTextColor: mainTextColor
     Layout.preferredWidth: parent.width
     Layout.alignment: Qt.AlignHCenter
-    color: mainTextCOlor
+    color: mainTextColor
     font.pointSize: 14
     //font.family: "fontawesome"
     leftPadding: 50

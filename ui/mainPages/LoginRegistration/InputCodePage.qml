@@ -7,7 +7,7 @@ Rectangle {
     height: parent.height
     property color mainAppColor: "#6fda9c"
     property color mainBackgroundColor: "#191919"
-    property color mainTextCOlor: "white"
+    property color mainTextColor: "white"
     property string phoneNumber: ""
     color: mainBackgroundColor
 

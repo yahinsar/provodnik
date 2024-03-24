@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtPositioning 5.15
 
 Button {
-    property color backgroundColor: "#FFFFFF"
+    property color backgroundColor: "#6fda9c"
     display: AbstractButton.TextUnderIcon
     background: Rectangle {
             color: backgroundColor

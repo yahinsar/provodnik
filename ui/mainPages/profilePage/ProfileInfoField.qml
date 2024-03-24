@@ -3,17 +3,17 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 TextField {
-    id: textFieldWithIcon
+    id: profileInfoField
     property string iconName: ""
     property string startText: ""
-    width: parent.width
+    width: 250
     placeholderText: startText
     placeholderTextColor: mainTextColor
     Layout.preferredWidth: parent.width
     Layout.alignment: Qt.AlignHCenter
     color: mainTextColor
     font.pointSize: 14
-    leftPadding: 20
+    leftPadding: 5
     background: Rectangle {
         implicitWidth: 200
         implicitHeight: 40
@@ -21,7 +21,7 @@ TextField {
         color: "transparent"
     }
     Rectangle {
-        width: parent.width - 10
+        width: 250
         height: 1
         Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom

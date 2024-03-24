@@ -21,7 +21,6 @@ set(PROJECT_SOURCES
     map_manager.h
     map_manager.cpp
     main.qml
-    provodnik.png
     iconButton.qml
 )
 
@@ -40,7 +39,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         userRefillPage.qml
         CustomButton.qml
         iconButton.qml
-        profilePage.qml
     )
 else()
     if(ANDROID)

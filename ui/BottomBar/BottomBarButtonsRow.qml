@@ -3,12 +3,18 @@ import QtQuick.Controls 2.15
 import QtPositioning 5.15
 
 Row {
+
     id: bottomBarButtonsRow
     //anchors.bottom: parent.bottom
     anchors.bottomMargin: 10
     spacing: 5
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
+    property color mainAppColor: "#6fda9c"
+    property color pressedButtonColor: "#297F4B"
+    property color hoveredButtonColor: "#35B166"
+    property color mainButtonColor: "#6fda9c"
+    property color mainTextColor: "white"
     BottomBarButton {
         text: "Reset View"
         icon.source: "icons/reset.png"
@@ -21,34 +27,31 @@ Row {
     BottomBarButton {
         text: "Мое местоположение"
         icon.source: "icons/my-location.png"
-        backgroundColor: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
-
+        //backgroundColor: control.pressed ? pressedButtonColor : control.hovered ? hoveredButtonColor : mainButtonColor
         property bool isPressed: false
         onClicked: {
             visibleMyCoordinates = !visibleMyCoordinates;
-
+            isPressed = !isPressed;
             if (positionSource.valid)
                 userCoordinate = positionSource.position.coordinate;
             else
                 userCoordinate = QtPositioning.coordinate(51.523118, 46.019991);
 
             if (isPressed)
-                background.color = "#FFFFFF";
+                background.color = pressedButtonColor;
             else
             {
-                background.color = "#CCCCCC";
+                background.color = mainButtonColor;
                 map.zoomLevel = 14;
                 map.center = userCoordinate
             }
-
-            isPressed = !isPressed;
         }
     }
 
     BottomBarButton {
         text: "Маршрут"
         icon.source: "icons/route.png"
-        backgroundColor: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
+        //backgroundColor: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
         property bool isPressed: false
         onClicked: {
             // Находим ближайшую синюю метку
@@ -94,7 +97,7 @@ Row {
         text: "Профиль"
         icon.source: "icons/profile.png"
         onClicked: {
-            stackView.push("../../profilePage.qml", {userID: userID});
+            stackView.push("../mainPages/profilePage/profilePage.qml", {userID: userID});
         }
     }
 }
