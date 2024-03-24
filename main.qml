@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import "ui/mainPages/LoginRegistration"
 ApplicationWindow {
     visible: true
     width: 500
@@ -10,7 +11,6 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
 
-        // Создаем экземпляр CustomPage с использованием sourceComponent
-        initialItem: LoginRegistration {}
+        initialItem: InputNumberPage {}
     }
 }

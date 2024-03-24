@@ -7,15 +7,6 @@ Page {
     height: parent.height
     //color: "lightgrey"
 
-    Image {
-        source: "provodnikWithoutBackgroundColor.png"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        width: 400
-        height: 400
-    }
-
     ColumnLayout {
         id: mainColumn
         anchors.centerIn: parent

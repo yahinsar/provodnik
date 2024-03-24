@@ -21,7 +21,6 @@ set(PROJECT_SOURCES
     map_manager.h
     map_manager.cpp
     main.qml
-    LoginRegistration.qml
     provodnik.png
     iconButton.qml
 )

@@ -1,14 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-
+import "ui/mainButtons"
+import "ui"
 Rectangle {
     width: parent.width
     height: parent.height
 
     property int userID: 0
     property var userInfo: ({})
-
     color: "#fdfdfd"
     gradient: Gradient {
         GradientStop {
@@ -114,18 +114,24 @@ Rectangle {
                 text: userInfo.firstName
             }
 
-            Item {
+            Button {
                 Layout.alignment: Qt.AlignVCenter
-                Image {
-                    id: saveIcon1
-                    source: "save.png"
-                    width: 15
-                    height: 15
-                    MouseArea {
-                        onClicked: saveChanges()
-                    }
+                display: AbstractButton.TextUnderIcon
+                //text: "Reset View"
+                onClicked: {
+                    saveChanges();
                 }
+                icon.source: "save.png"
+                background: Rectangle {
+                        color: parent.color
+                        radius: 5
+                        border.width: 1
+                        border.color: "#000000"
+                    }
+                width: 10
+                height: 10
             }
+
 
         }
 
@@ -277,12 +283,7 @@ Rectangle {
         }
     }
 
-    Button {
-        //text: "Back"
-        onClicked: stackView.pop()
-        icon.source: "back.png"
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
+    BackButton {
     }
 
     function saveChanges() {

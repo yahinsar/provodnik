@@ -3,6 +3,8 @@ import QtQuick.Controls 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
 
+import "ui/BottomBar"
+import "ui/MapRect"
 
 Rectangle {
     width: parent.width
@@ -18,146 +20,30 @@ Rectangle {
         name: "osm"
     }
 
-    Map {
+    //MapView {}
+    MapRect {
         id: map
-        anchors.fill: parent
-        plugin: mapPlugin
-        center: QtPositioning.coordinate(51.52, 46.03)
-        zoomLevel: 12
 
-        MouseArea {
-            anchors.fill: parent
-            drag.target: map
-            onClicked: {
-                // Prevent clicks from being triggered during drag
-                if (!dragActive) {
-                    console.log("Map clicked")
-                }
-            }
+        //MouseSettings {}
 
-            property bool dragActive: false
-            property real dragStartX: 0
-            property real dragStartY: 0
-            property var dragStartCenter
-
-            function handleMapPressed(event) {
-                //console.log("handleMapPressed")
-                dragActive = true;
-                dragStartX = event.x;
-                dragStartY = event.y;
-                dragStartCenter = map.center;
-            }
-
-            function handleMapReleased() {
-                //console.log("handleMapReleased")
-                dragActive = false;
-            }
-
-            function handleMapPositionChanged(event) {
-                if (dragActive) {
-                    // Проверяем, находится ли курсор мыши в пределах приложения
-                    if (event.x >= 0 && event.x <= map.width &&
-                        event.y >= 0 && event.y <= map.height) {
-                        var deltaX = event.x - dragStartX;
-                        var deltaY = event.y - dragStartY;
-
-                        // Расчет нового центра карты с учетом уровня масштабирования
-                        var distanceFromCenter = Math.sqrt((event.x - map.width / 2) * (event.x - map.width / 2) + (event.y - map.height / 2) * (event.y - map.height / 2));
-                        var scaleFactor = 0.1 / distanceFromCenter * (1 / map.zoomLevel);
-                        var newCenter = QtPositioning.coordinate(
-                            dragStartCenter.latitude + deltaY * scaleFactor / (map.height),
-                            dragStartCenter.longitude - deltaX * scaleFactor / (map.width)
-                        );
-
-                        map.center = newCenter;
-                    }
-                }
-            }
-
-            onPressed: handleMapPressed(mouse)
-            onReleased: handleMapReleased()
-            onPositionChanged: handleMapPositionChanged(mouse)
-            onWheel: {
-                if (wheel.angleDelta.y > 0) {
-                    map.zoomLevel += 1; // Увеличение масштаба при прокрутке вверх
-                } else {
-                    map.zoomLevel -= 1; // Уменьшение масштаба при прокрутке вниз
-                }
-            }
-        }
-
-        //! [marker]
-        MapQuickItem {
-            id: marker1Item
+        StationMarker {
             coordinate: QtPositioning.coordinate(51.526777, 46.017251)
-            anchorPoint.x: marker1.width / 2
-            anchorPoint.y: marker1.height * 2
-            sourceItem: Image {
-                id: marker1
-                source: "station_marker.png" // Путь к изображению метки
-                width: 36 * map.zoomLevel / 12
-                height: 36 * map.zoomLevel / 12
-            }
-            MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                            stackView.push("stationInfo.qml", { markerType: "marker1Item", stationID: 1 });
-                        }
-                }
+            stationID: 1
         }
 
-        MapQuickItem {
-            id: marker2Item
+        StationMarker {
             coordinate: QtPositioning.coordinate(51.522031, 46.019659)
-            anchorPoint.x: marker2.width / 2
-            anchorPoint.y: marker2.height * 2
-            sourceItem: Image {
-                id: marker2
-                source: "station_marker.png" // Путь к изображению метки
-                width: 36 * map.zoomLevel / 12
-                height: 36 * map.zoomLevel / 12
-            }
-            MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                            stackView.push("stationInfo.qml", { markerType: "marker2Item", stationID: 2  });
-                        }
-                }
+            stationID: 2
         }
 
-        MapQuickItem {
-            id: marker3Item
+        StationMarker {
             coordinate: QtPositioning.coordinate(51.513254, 45.949231)
-            anchorPoint.x: marker3.width / 2
-            anchorPoint.y: marker3.height * 2
-            sourceItem: Image {
-                id: marker3
-                source: "station_marker.png" // Путь к изображению метки
-                width: 36 * map.zoomLevel / 12
-                height: 36 * map.zoomLevel / 12
-            }
-            MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                            stackView.push("stationInfo.qml", { markerType: "marker3Item", stationID: 3 });
-                        }
-                }
+            stationID: 3
         }
 
-        MapQuickItem {
-                    id: userLocationMarker
-                    visible: visibleMyCoordinates
-                    coordinate: userCoordinate
-                    anchorPoint.x: marker.width / 2
-                    anchorPoint.y: marker.height * 2
-                    sourceItem: Image {
-                        id: marker
-                        source: "my_marker.png" // Путь к изображению метки
-                        width: 36 * map.zoomLevel / 12
-                        height: 36 * map.zoomLevel / 12
-                    }
-                }
-        //! [marker]
+        UserMarker {
+            coordinate: userCoordinate
+        }
 
         MapPolyline {
             id: routePolyline
@@ -206,128 +92,11 @@ Rectangle {
         }
 
     }
+    BottomBar {
+        BottomBarButtonsRow {
 
-    Row {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
-        spacing: 5
-        Button {
-            //text: "Reset View"
-            onClicked: {
-                map.center = QtPositioning.coordinate(51.52, 46.03);
-                map.zoomLevel = 12;
-            }
-            icon.source: "reset.png"
-            background: Rectangle {
-                    color: "#FFFFFF"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000000"
-                }
-        }
-
-        Button {
-            //text: "Мое местоположение"
-            property bool isPressed: false
-            onClicked: {
-                visibleMyCoordinates = !visibleMyCoordinates;
-                if (positionSource.valid) {
-                    userCoordinate = positionSource.position.coordinate;
-                } else {
-                    userCoordinate = QtPositioning.coordinate(51.523118, 46.019991);
-                }
-                map.center = userCoordinate
-                map.zoomLevel = 14;
-                if (isPressed) {
-                            background.color = "#FFFFFF";
-                        } else {
-                            background.color = "#CCCCCC";
-                        }
-                        isPressed = !isPressed;
-            }
-            icon.source: "my-location.png"
-            property color originalBackgroundColor: "#FFFFFF"
-            background: Rectangle {
-                    color: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000000"
-                }
-        }
-
-        Button {
-            //text: "Построить путь"
-            property bool isPressed: false
-            onClicked: {
-                // Находим ближайшую синюю метку
-                var nearestMarker = marker1;
-                var minDistance = Math.sqrt(Math.pow(marker1Item.coordinate.latitude - userLocationMarker.latitude, 2) +
-                                            Math.pow(marker1Item.coordinate.longitude - userLocationMarker.longitude, 2));
-                var markers = [marker2Item, marker3Item]; // Массив всех синих меток
-
-                for (var i = 0; i < markers.length; ++i) {
-                    var distance = Math.sqrt(Math.pow(markers[i].coordinate.latitude - userLocationMarker.latitude, 2) +
-                                             Math.pow(markers[i].coordinate.longitude - userLocationMarker.longitude, 2));
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestMarker = markers[i];
-                    }
-                }
-
-
-                // Строим маршрут от текущего местоположения до ближайшей метки
-                routeQuery.clearWaypoints();
-                routeQuery.addWaypoint(userCoordinate);
-                routeQuery.addWaypoint(nearestMarker.coordinate);
-                routeQuery.travelModes = RouteQuery.CarTravel;
-                routeQuery.routeOptimizations = RouteQuery.FastestRoute;
-                routeModel.update();
-                if (isPressed) {
-                            background.color = "#FFFFFF";
-                        } else {
-                            background.color = "#CCCCCC";
-                        }
-                        isPressed = !isPressed;
-            }
-            icon.source: "route.png"
-            property color originalBackgroundColor: "#FFFFFF"
-            background: Rectangle {
-                    color: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000000"
-                }
-        }
-
-        Button {
-            //text: "Текущая зарядка"
-            onClicked: {
-                stackView.push("userRefillPage.qml", {userID: userID});
-            }
-            icon.source: "electric.png"
-            background: Rectangle {
-                    color: "#FFFFFF"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000000"
-                }
-        }
-
-        Button {
-            //text: "Текущая зарядка"
-            onClicked: {
-                stackView.push("profilePage.qml", {userID: userID});
-            }
-            icon.source: "profile.png"
-            background: Rectangle {
-                    color: "#FFFFFF"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000000"
-                }
         }
     }
-
     //RouteCoordinateForm { }
 
     PositionSource {

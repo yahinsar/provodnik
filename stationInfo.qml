@@ -1,11 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "ui/mainButtons"
 
 Rectangle {
     width: parent.width
     height: parent.height
 
-    property string markerType: ""
     property int stationID: 0
     property var stationsInfo: []
 
@@ -153,13 +153,8 @@ Rectangle {
             }
         }
 
-        Button {
-            id: backButton
-            //text: "Back"
-            onClicked: stackView.pop()
-            icon.source: "back.png"
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
+        BackButton {
+
         }
 
     }

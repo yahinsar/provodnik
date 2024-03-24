@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "ui/mainButtons"
 
 Rectangle {
     id: mainRect
@@ -219,16 +220,11 @@ Rectangle {
         }
 
 
-        anchors.bottomMargin: 40 // Отступ внизу кнопки
+        anchors.bottomMargin: 40
     }
 
 
-    Button {
-        //text: "Back"
-        onClicked: stackView.pop()
-        icon.source: "back.png"
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
+    BackButton {
     }
 
     function updateCarInfo(carID) {
