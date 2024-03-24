@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>users.sqlite</file>
-        <file>RouteCoordinate.qml</file>
-        <file>RouteCoordinateForm.ui.qml</file>
         <file>ui/BottomBar/BottomBar.qml</file>
         <file>ui/MapRect/MapRect.qml</file>
         <file>ui/MapRect/StationMarker.qml</file>

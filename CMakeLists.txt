@@ -21,7 +21,6 @@ set(PROJECT_SOURCES
     map_manager.h
     map_manager.cpp
     main.qml
-    iconButton.qml
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -30,12 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
 
         qml.qrc
-        CustomPage.qml
-        marker_red.png marker_blue.png
-        RouteCoordinate.qml RouteCoordinateForm.ui.qml
 
-        CustomButton.qml
-        iconButton.qml
     )
 else()
     if(ANDROID)
