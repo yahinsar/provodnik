@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtPositioning 5.15
+import "../../BottomBar"
 
 Row {
 
@@ -38,13 +39,13 @@ Row {
                 userCoordinate = QtPositioning.coordinate(51.523118, 46.019991);
 
             if (isPressed)
-                background.color = pressedButtonColor;
-            else
             {
-                background.color = mainButtonColor;
+                background.color = pressedButtonColor;
                 map.zoomLevel = 14;
                 map.center = userCoordinate
             }
+            else
+                background.color = mainButtonColor;
         }
     }
 
@@ -89,7 +90,7 @@ Row {
         text: "Текущая зарядка"
         icon.source: "icons/electric.png"
         onClicked: {
-            stackView.push("../../userRefillPage.qml", {userID: userID});
+            stackView.push("../currentRefillPage/currentRefillPage.qml", {userID: userID});
         }
     }
 
@@ -97,7 +98,7 @@ Row {
         text: "Профиль"
         icon.source: "icons/profile.png"
         onClicked: {
-            stackView.push("../mainPages/profilePage/profilePage.qml", {userID: userID});
+            stackView.push("../profilePage/profilePage.qml", {userID: userID});
         }
     }
 }

@@ -1,19 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>mainMapPage.qml</file>
         <file>users.sqlite</file>
         <file>RouteCoordinate.qml</file>
         <file>RouteCoordinateForm.ui.qml</file>
-        <file>stationInfo.qml</file>
-        <file>userRefillPage.qml</file>
         <file>ui/BottomBar/BottomBar.qml</file>
         <file>ui/MapRect/MapRect.qml</file>
         <file>ui/MapRect/StationMarker.qml</file>
         <file>ui/MapRect/UserMarker.qml</file>
         <file>ui/MapRect/MouseSettings.qml</file>
         <file>ui/BottomBar/BottomBarButton.qml</file>
-        <file>ui/BottomBar/BottomBarButtonsRow.qml</file>
         <file>ui/mainPages/LoginRegistration/InputNumberPage.qml</file>
         <file>ui/mainPages/LoginRegistration/InputCodePage.qml</file>
         <file>ui/mainPages/LoginRegistration/RegistrationPage.qml</file>
@@ -29,5 +25,9 @@
         <file>ui/mainPages/profilePage/CarInfoItem.qml</file>
         <file>ui/mainPages/profilePage/CarIcon.qml</file>
         <file>ui/mainPages/profilePage/ProfileBottomBarButtonsRow.qml</file>
+        <file>ui/mainPages/mapPage/mainMapPage.qml</file>
+        <file>ui/mainPages/mapPage/MapBottomBarButtonsRow.qml</file>
+        <file>ui/mainPages/currentRefillPage/currentRefillPage.qml</file>
+        <file>ui/mainPages/stationPage/stationPage.qml</file>
     </qresource>
 </RCC>

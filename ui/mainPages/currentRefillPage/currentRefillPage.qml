@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import "ui/mainButtons"
+import "../../../ui/mainButtons"
 
 Rectangle {
     id: mainRect
@@ -114,7 +114,7 @@ Rectangle {
                                             Image {
                                                 id: connectorTypeImage
                                                 property string connectorImage: portInfo.connectorImage
-                                                source: connectorImage
+                                                source: "icons/" + connectorImage
                                                 anchors {
                                                     top: parent.top
                                                     topMargin: 10

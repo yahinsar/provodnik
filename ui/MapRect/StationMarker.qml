@@ -16,7 +16,7 @@ MapQuickItem {
     MouseArea {
             anchors.fill: parent
             onClicked: {
-                    stackView.push("../../stationInfo.qml", { stationID: markerItem.stationID });
+                    stackView.push("../mainPages/stationPage/stationPage.qml", { stationID: markerItem.stationID });
                 }
         }
 }

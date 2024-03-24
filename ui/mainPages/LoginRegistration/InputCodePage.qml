@@ -36,7 +36,7 @@ Rectangle {
                     stackView.push("RegistrationPage.qml", {phoneNumber: phoneNumber});
                 }
                 else {
-                    stackView.push("../../../mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumber)});
+                    stackView.push("../mapPage/mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumber)});
                 }
             }
         }

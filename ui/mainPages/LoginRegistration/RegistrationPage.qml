@@ -54,7 +54,7 @@ Rectangle {
             anchors.top: emailInput.bottom + 30
             onClicked: {
                 databaseManager.saveUserInfo(firstNameInput.text, lastNameInput.text, middleNameInput.text, phoneNumber, emailInput.text);
-                stackView.push("../../../mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumber)});
+                stackView.push("../mapPage/mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumber)});
             }
         }
 

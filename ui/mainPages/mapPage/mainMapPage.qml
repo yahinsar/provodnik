@@ -3,8 +3,8 @@ import QtQuick.Controls 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
 
-import "ui/BottomBar"
-import "ui/MapRect"
+import "../../../ui/BottomBar"
+import "../../../ui/MapRect"
 
 Rectangle {
     width: parent.width
@@ -93,7 +93,7 @@ Rectangle {
 
     }
     BottomBar {
-        BottomBarButtonsRow {
+        MapBottomBarButtonsRow {
 
         }
     }
@@ -116,7 +116,7 @@ Rectangle {
 
         for (var i = 0; i < map.markers.length; i++) {
             var marker = map.markers[i];
-            if (marker.sourceItem.source === "station_marker.png") {
+            if (marker.sourceItem.source === "icons/station_marker.png") {
                 var distance = userCoordinate.distanceTo(marker.coordinate);
                 if (distance < closestDistance) {
                     closestMarker = marker;

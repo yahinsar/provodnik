@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import "ui/mainButtons"
+import "../../mainButtons"
 
 Rectangle {
     width: parent.width
@@ -88,7 +88,7 @@ Rectangle {
                                 Image {
                                     id: connectorTypeImage
                                     property string connectorImage: modelData.connectorImage
-                                    source: connectorImage
+                                    source: "icons/" + connectorImage
                                     anchors {
                                         top: parent.top
                                         topMargin: 10
