@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/icons">
-        <file>provodnik.png</file>
-    </qresource>
-    <qresource prefix="/">
-        <file>qml.qrc</file>
-    </qresource>
-</RCC>
