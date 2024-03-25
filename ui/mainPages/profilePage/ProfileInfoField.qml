@@ -15,13 +15,13 @@ TextField {
     font.pointSize: 14
     leftPadding: 5
     background: Rectangle {
-        implicitWidth: 200
-        implicitHeight: 40
+        width: 200
+        height: 40
         radius: implicitHeight / 2
         color: "transparent"
     }
     Rectangle {
-        width: 250
+        width: 265
         height: 1
         Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom

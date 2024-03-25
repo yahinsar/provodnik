@@ -26,5 +26,9 @@
         <file>ui/mainPages/mapPage/MapBottomBarButtonsRow.qml</file>
         <file>ui/mainPages/currentRefillPage/currentRefillPage.qml</file>
         <file>ui/mainPages/stationPage/stationPage.qml</file>
+        <file>ui/mainPages/stationPage/PortInfoRect.qml</file>
+        <file>ui/mainPages/currentRefillPage/ChargeIcon.qml</file>
+        <file>ui/mainPages/currentRefillPage/InfoLabelRect.qml</file>
+        <file>ui/mainPages/currentRefillPage/PortInfoRect.qml</file>
     </qresource>
 </RCC>

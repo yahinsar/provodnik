@@ -38,7 +38,7 @@ Rectangle {
 
         Row {
             Layout.topMargin: 15
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Имя"
@@ -51,7 +51,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Фамилия"
@@ -64,7 +64,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Отчество"
@@ -77,7 +77,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Номер телефона"
@@ -90,7 +90,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Электронная почта"
@@ -104,6 +104,13 @@ Rectangle {
 
         InputButton {
             id: sendCodeButton
+            width: parent.width - 20
+            anchors {
+                left: parent.left
+                right: parent.right
+                leftMargin: 10
+                rightMargin: 10
+            }
             height: 50
             baseColor: mainAppColor
             Layout.preferredWidth: parent.width - 5
@@ -127,7 +134,7 @@ Rectangle {
 
         Row {
             Layout.topMargin: 15
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Реферальный код"
@@ -140,7 +147,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Номер бонусной карты"
@@ -153,7 +160,7 @@ Rectangle {
         }
 
         Row {
-            leftPadding: 5
+            leftPadding: 10
             spacing: 10
             ProfileInfoLabel {
                 labelText: "Баланс бонусной карты"

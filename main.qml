@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 import "ui/mainPages/LoginRegistration"
 ApplicationWindow {
     visible: true
-    width: 500
+    width: 520
     height: 800
 
     StackView {

@@ -5,7 +5,7 @@ import QtPositioning 5.15
 MapQuickItem {
     id: markerItem
     anchorPoint.x: marker.width / 2
-    anchorPoint.y: marker.height * 2
+    anchorPoint.y: marker.height
     property int stationID: 0
     sourceItem: Image {
         id: marker
