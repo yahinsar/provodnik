@@ -4,9 +4,6 @@ import QtQuick.Layouts 1.15
 
 Rectangle {
     id: portRectangle
-    property color mainAppColor: "#6fda9c"
-    property color mainBackgroundColor: "#191919"
-    property color mainTextColor: "white"
     property color redColor: "#EA8B86"
     property string labelText: ""
 
@@ -17,36 +14,19 @@ Rectangle {
     property string connectorImage: portInfo.connectorImage
     radius: 10
     border.width: 1
-    //color: mainAppColor
     color: mainAppColor
-    width: listView.width - 10
+    width: mRect.width - 10
     anchors {
         left: parent.left
-        right: listView.right
+        right: mRect.right
         leftMargin: 5
         rightMargin: 5
     }
-    height: 40
-    //anchors.leftMargin: 5
-    //anchors.horizontalCenter: listView.horizontalCenter
-    //anchors.left: stationRect + 10
-    //anchors.right: parent.right
-//    anchors.rightMargin: 5
+    height: 50
     border.color: mainBackgroundColor
-        Image {
+        ConnectorImage {
             id: connectorTypeImage
-            source: "icons/" + connectorImage
-            //anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-//            anchors {
-//                top: parent.top
-//                topMargin: 10
-//                leftMargin: 5
-//            }
-            width: 35
-            height: 35
+            imagePath: "icons/" + connectorImage
         }
 
         property string lastChargeStart: modelData.lastChargeStart
@@ -81,8 +61,8 @@ Rectangle {
             anchors {
                 top: connectorTypeImage.top
                 left: connectorTypeImage.right
-                leftMargin: 5
                 verticalCenter: parent.verticalCenter
+                leftMargin: 3
             }
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter

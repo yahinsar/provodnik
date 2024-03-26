@@ -3,14 +3,11 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 Rectangle {
-    property color mainAppColor: "#6fda9c"
-    property color mainBackgroundColor: "#191919"
-    property color mainTextColor: "white"
     property string labelText: ""
     radius: 10
     color: "transparent"
-    implicitWidth: 40
-    implicitHeight: 40
+    width: 40
+    height: 40
     border.color: mainAppColor
     Image {
         id: carIcon

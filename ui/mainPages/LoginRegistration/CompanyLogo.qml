@@ -5,6 +5,8 @@ Image {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
     anchors.topMargin: 10
-    width: 300
-    height: 300
+    property int imageSize: Math.min(parent.width / 3, parent.height / 3)
+
+    width: imageSize
+    height: imageSize
 }

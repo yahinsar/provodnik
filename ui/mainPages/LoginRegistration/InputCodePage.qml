@@ -17,7 +17,7 @@ Rectangle {
         id: mainColumn
         anchors.centerIn: parent
         spacing: 10
-        width: 300
+        width: parent.width * 0.6
 
         InputFieldWithIcon {
             id: codeInput

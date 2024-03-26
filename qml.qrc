@@ -5,7 +5,6 @@
         <file>ui/MapRect/MapRect.qml</file>
         <file>ui/MapRect/StationMarker.qml</file>
         <file>ui/MapRect/UserMarker.qml</file>
-        <file>ui/MapRect/MouseSettings.qml</file>
         <file>ui/BottomBar/BottomBarButton.qml</file>
         <file>ui/mainPages/LoginRegistration/InputNumberPage.qml</file>
         <file>ui/mainPages/LoginRegistration/InputCodePage.qml</file>
@@ -19,7 +18,6 @@
         <file>ui/mainPages/profilePage/SaveButton.qml</file>
         <file>ui/mainPages/profilePage/ProfileInfoField.qml</file>
         <file>ui/mainPages/profilePage/ProfileInfoLabel.qml</file>
-        <file>ui/mainPages/profilePage/CarInfoItem.qml</file>
         <file>ui/mainPages/profilePage/CarIcon.qml</file>
         <file>ui/mainPages/profilePage/ProfileBottomBarButtonsRow.qml</file>
         <file>ui/mainPages/mapPage/mainMapPage.qml</file>
@@ -28,7 +26,8 @@
         <file>ui/mainPages/stationPage/stationPage.qml</file>
         <file>ui/mainPages/stationPage/PortInfoRect.qml</file>
         <file>ui/mainPages/currentRefillPage/ChargeIcon.qml</file>
-        <file>ui/mainPages/currentRefillPage/InfoLabelRect.qml</file>
         <file>ui/mainPages/currentRefillPage/PortInfoRect.qml</file>
+        <file>ui/mainPages/currentRefillPage/ConnectorImage.qml</file>
+        <file>ui/mainPages/stationPage/SomeIcon.qml</file>
     </qresource>
 </RCC>

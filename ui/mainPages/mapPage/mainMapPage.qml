@@ -9,11 +9,13 @@ import "../../../ui/MapRect"
 Rectangle {
     width: parent.width
     height: parent.height
+    property color mainAppColor: "#6fda9c"
+    property color mainTextColor: "white"
     property bool visibleMyCoordinates: false
     property var userCoordinate: QtPositioning.coordinate(51.523118, 46.019991)
     property int userID: 0
-    //property alias routeQuery: routeQuery
-    //property alias routeModel: routeModel
+    property alias routeQuery: routeQuery
+    property alias routeModel: routeModel
 
     Plugin {
         id: mapPlugin
@@ -23,8 +25,6 @@ Rectangle {
     //MapView {}
     MapRect {
         id: map
-
-        //MouseSettings {}
 
         StationMarker {
             coordinate: QtPositioning.coordinate(51.526777, 46.017251)

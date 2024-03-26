@@ -4,16 +4,17 @@ import QtQuick.Layouts 1.15
 
 Rectangle {
     property string labelText: ""
+    property string imagePath: ""
     radius: 10
     color: "transparent"
-    width: 220
-    height: 40
-    border.color: mainAppColor
-    Label {
-        text: labelText
-        color: mainTextColor
-        font.pointSize: 14
+    implicitWidth: 50
+    implicitHeight: 50
+    Image {
+        id: chargeIcon
+        source: imagePath
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        width: 45
+        height: 45
     }
 }

@@ -6,11 +6,15 @@ TextField {
     id: profileInfoField
     property string iconName: ""
     property string startText: ""
-    width: 250
+    width: profileRect.width - 230 - 40
+    anchors {
+        left: ProfileInfoLabel.right
+        right: profileRect.right
+        leftMargin: 20
+        rightMargin: 20
+    }
     placeholderText: startText
     placeholderTextColor: mainTextColor
-    Layout.preferredWidth: parent.width
-    Layout.alignment: Qt.AlignHCenter
     color: mainTextColor
     font.pointSize: 14
     leftPadding: 5
@@ -21,7 +25,13 @@ TextField {
         color: "transparent"
     }
     Rectangle {
-        width: 265
+        width: profileRect.width - 230 - 40
+        anchors {
+            left: ProfileInfoLabel.right
+            right: profileRect.right
+            leftMargin: 20
+            rightMargin: 20
+        }
         height: 1
         Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom

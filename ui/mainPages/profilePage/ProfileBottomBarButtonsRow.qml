@@ -6,15 +6,10 @@ import "../../../ui/BottomBar"
 Row {
 
     id: profileBottomBarButtonsRow
-    anchors.bottomMargin: 10
     spacing: 5
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
-    property color mainAppColor: "#6fda9c"
-    property color pressedButtonColor: "#297F4B"
-    property color hoveredButtonColor: "#35B166"
-    property color mainButtonColor: "#6fda9c"
-    property color mainTextColor: "white"
+    property color mainButtonColor: mainAppColor
 
     BottomBarButton {
         text: "История"

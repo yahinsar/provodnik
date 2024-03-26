@@ -40,7 +40,8 @@ Rectangle {
             Layout.topMargin: 15
             leftPadding: 10
             spacing: 10
-            ProfileInfoLabel {
+            ProfileInfoLabel
+            {
                 labelText: "Имя"
             }
             ProfileInfoField {
@@ -172,14 +173,6 @@ Rectangle {
             }
         }
 
-//        Text {
-//            id: listText
-//            text: "Список машин:"
-//            color: mainTextColor
-//            Layout.alignment: Qt.AlignLeft
-//            Layout.fillWidth: true
-//        }
-
         Text {
             id: carListLabel
             text: "Список машин"
@@ -196,8 +189,6 @@ Rectangle {
             width: 300
             height: 100
             model: userInfo.carIDs
-            //anchors.top: listText.bottom
-            //interactive: false
             delegate: Item {
                 width: parent.width
                 height: 45
@@ -229,13 +220,10 @@ Rectangle {
                 property var carInfo: ({})
             }
         }
-
-        //SaveButton {}
     }
 
     BottomBar {
         ProfileBottomBarButtonsRow {
-
         }
     }
 

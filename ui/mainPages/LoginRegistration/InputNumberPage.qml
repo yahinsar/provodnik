@@ -4,12 +4,12 @@ import QtQuick.Layouts 1.15
 import "../../mainButtons"
 
 Rectangle {
-    width: parent.width
-    height: parent.height
-    property int userID: 0
     property color mainAppColor: "#6fda9c"
     property color mainBackgroundColor: "#191919"
     property color mainTextColor: "white"
+    width: parent.width
+    height: parent.height
+    property int userID: 0
     color: mainBackgroundColor
 
     CompanyLogo {}
@@ -18,7 +18,7 @@ Rectangle {
         id: mainColumn
         anchors.centerIn: parent
         spacing: 10
-        width: 300
+        width: parent.width * 0.6
 
         InputFieldWithIcon {
             id: phoneNumberInput

@@ -13,12 +13,9 @@ TextField {
     Layout.alignment: Qt.AlignHCenter
     color: mainTextColor
     font.pointSize: 14
-    //font.family: "fontawesome"
-    leftPadding: 50
+    leftPadding: 65
+    bottomPadding: 10
     background: Rectangle {
-        implicitWidth: 200
-        implicitHeight: 40
-        radius: implicitHeight / 2
         color: "transparent"
     }
 
@@ -27,17 +24,22 @@ TextField {
         source: iconName
         anchors {
             left: parent.left
-            leftMargin: 5
+            leftMargin: 20
             Layout.alignment: parent.AlignHCenter
         }
-        width: 30
-        height: 30
+        width: 32
+        height: 32
     }
 
     Rectangle {
-        width: parent.width - 10
+        width: parent.width - 40
+        anchors {
+            left: parent.left
+            right: parent.right
+            leftMargin: 20
+            rightMargin: 20
+        }
         height: 1
-        Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom
         color: mainAppColor
     }

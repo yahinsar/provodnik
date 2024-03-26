@@ -6,18 +6,14 @@ import "../../BottomBar"
 Row {
 
     id: bottomBarButtonsRow
-    //anchors.bottom: parent.bottom
-    anchors.bottomMargin: 10
     spacing: 5
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
-    property color mainAppColor: "#6fda9c"
     property color pressedButtonColor: "#297F4B"
     property color hoveredButtonColor: "#35B166"
     property color mainButtonColor: "#6fda9c"
-    property color mainTextColor: "white"
     BottomBarButton {
-        text: "Reset View"
+        text: "Исходный вид"
         icon.source: "icons/reset.png"
         onClicked: {
             map.center = QtPositioning.coordinate(51.52, 46.03);
@@ -28,7 +24,6 @@ Row {
     BottomBarButton {
         text: "Мое местоположение"
         icon.source: "icons/my-location.png"
-        //backgroundColor: control.pressed ? pressedButtonColor : control.hovered ? hoveredButtonColor : mainButtonColor
         property bool isPressed: false
         onClicked: {
             visibleMyCoordinates = !visibleMyCoordinates;
@@ -52,7 +47,6 @@ Row {
     BottomBarButton {
         text: "Маршрут"
         icon.source: "icons/route.png"
-        //backgroundColor: control.pressed ? "#CCCCCC" : control.hovered ? "#EFEFEF" : "#FFFFFF"
         property bool isPressed: false
         onClicked: {
             // Находим ближайшую синюю метку
@@ -87,7 +81,7 @@ Row {
     }
 
     BottomBarButton {
-        text: "Текущая зарядка"
+        text: "Текущие зарядки"
         icon.source: "icons/electric.png"
         onClicked: {
             stackView.push("../currentRefillPage/currentRefillPage.qml", {userID: userID});

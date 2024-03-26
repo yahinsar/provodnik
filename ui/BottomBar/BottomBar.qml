@@ -10,14 +10,4 @@ Rectangle {
     property color mainBackgroundColor: "#191919"
     property color mainTextColor: "white"
     color: mainBackgroundColor
-//    gradient: Gradient {
-//        GradientStop {
-//            position: 0.00;
-//            color: "#000000";
-//        }
-//        GradientStop {
-//            position: 1.00;
-//            color: "#ffffff";
-//        }
-//    }
 }

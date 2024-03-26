@@ -31,7 +31,6 @@ Rectangle {
         font.pointSize: 14
         color: mainTextColor
         anchors {
-            topMargin: 10
             horizontalCenter: parent.horizontalCenter
             leftMargin: 5
         }
@@ -48,25 +47,27 @@ Rectangle {
         model: unpaidRefillsInfo
         delegate: Component {
             Rectangle {
-                //anchors.topMargin: 20
                 id: mRect
-                width: listView.width
+                width: listView.width - 20
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: 10
+                    rightMargin: 10
+                    topMargin: 5
+                }
                 height: 250
                 color: mainBackgroundColor
                 border.color: mainAppColor
                 border.width: 1
                 radius: 10
-                anchors {
-                    topMargin: 5
-                    left: parent.left
-                    right: parent.right
-                }
                 ColumnLayout {
                     spacing: 5
                     property var carInfo: ({})
                     Row {
                         id: addressRow
                         leftPadding: 5
+
                         ChargeIcon {
                             imagePath: "icons/address.png"
                         }
@@ -76,7 +77,6 @@ Rectangle {
                             leftPadding: 10
                             text: modelData.address
                             color: mainTextColor
-
                             anchors {
                                 top: carIcon.top
                                 left: carIcon.right
@@ -90,6 +90,7 @@ Rectangle {
 
                     Row {
                         leftPadding: 5
+
                         ChargeIcon {
                             imagePath: "icons/electric-car-green.png"
                         }
@@ -99,7 +100,6 @@ Rectangle {
                             leftPadding: 10
                             text: carInfo.brand + " " + carInfo.model + " (" + carInfo.licensePlate + ")"
                             color: mainTextColor
-
                             anchors {
                                 top: carIcon.top
                                 left: carIcon.right
@@ -144,17 +144,16 @@ Rectangle {
                 }
                 InputButton {
                     id: loginButton
-                    width: parent.width - 60
+                    width: parent.width * 0.66
                     anchors {
                         bottom: parent.bottom
                         left: parent.left
                         right: parent.right
-                        leftMargin: 30
-                        rightMargin: 30
+                        leftMargin: parent.width * 0.17
+                        rightMargin: parent.width * 0.17
                         bottomMargin: 10
                     }
                     height: 50
-                    Layout.preferredWidth: parent.width
                     Layout.alignment: Qt.AlignHCenter
                     name: "Перейти на страницу оплаты"
                     onClicked: {

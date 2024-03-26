@@ -47,6 +47,7 @@ public slots:
     QVariantMap getCarInfoByID(int carID);
     QVariantMap getPortTypeInfo(int portType);
     QVariantMap getUserInfoByID(int userID);
+    QVariantMap getStationInfoByID(int stationID);
     bool updateUserInfo(int userID, const QString &firstName, const QString &lastName,
                                          const QString &middleName, const QString &phone,
                                          const QString &email);

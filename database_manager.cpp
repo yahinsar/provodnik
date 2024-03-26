@@ -21,55 +21,6 @@ void DatabaseManager::closeDatabase()
     m_database.close();
 }
 
-bool DatabaseManager::createTables()
-{
-    QSqlQuery query;
-
-    // Таблица Users
-    if (!query.exec("CREATE TABLE IF NOT EXISTS Users ("
-                    "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "FirstName TEXT,"
-                    "LastName TEXT,"
-                    "MiddleName TEXT,"
-                    "Phone TEXT,"
-                    "Email TEXT,"
-                    "ReferralCode TEXT,"
-                    "CardNumber TEXT,"
-                    "CardBalance REAL)")) {
-        qDebug() << "Error: Failed to create Users table:" << query.lastError().text();
-        return false;
-    }
-
-    // Таблица Cars
-    if (!query.exec("CREATE TABLE IF NOT EXISTS Cars ("
-                    "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "UserID INTEGER,"
-                    "Brand TEXT,"
-                    "Model TEXT,"
-                    "Year INTEGER,"
-                    "LicensePlate TEXT,"
-                    "FOREIGN KEY (UserID) REFERENCES Users(ID))")) {
-        qDebug() << "Error: Failed to create Cars table:" << query.lastError().text();
-        return false;
-    }
-
-    // Таблица Refills
-    if (!query.exec("CREATE TABLE IF NOT EXISTS Refills ("
-                    "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "UserID INTEGER,"
-                    "CarID INTEGER,"
-                    "Date TEXT,"
-                    "Amount REAL,"
-                    "PortNumber INTEGER," // Добавляем новый столбец для номера порта
-                    "FOREIGN KEY (UserID) REFERENCES Users(ID),"
-                    "FOREIGN KEY (CarID) REFERENCES Cars(ID))")) {
-        qDebug() << "Error: Failed to create Refills table:" << query.lastError().text();
-        return false;
-    }
-
-    return true;
-}
-
 bool DatabaseManager::saveUserInfo(const QString &firstName, const QString &lastName,
                                  const QString &middleName, const QString &phone,
                                  const QString &email)
@@ -318,4 +269,23 @@ bool DatabaseManager::updateUserInfo(int userID, const QString &firstName, const
         return false;
     }
     return true;
+}
+
+QVariantMap DatabaseManager::getStationInfoByID(int stationID)
+{
+    QVariantMap stationInfo;
+
+    QSqlQuery query;
+    query.prepare("SELECT Address, ChargingPortsCount "
+                  "FROM ElectricStations "
+                  "WHERE ID = :stationID");
+    query.bindValue(":stationID", stationID);
+    if (query.exec() && query.next()) {
+        stationInfo["address"] = query.value(0).toString();
+        stationInfo["chargingPortsCount"] = query.value(1).toString();
+    } else {
+        qDebug() << "Error getting station info by ID:" << query.lastError().text();
+    }
+
+    return stationInfo;
 }

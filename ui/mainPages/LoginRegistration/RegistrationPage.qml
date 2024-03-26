@@ -18,28 +18,23 @@ Rectangle {
         id: mainColumn
         anchors.centerIn: parent
         spacing: 10
-        width: 300
+        width: parent.width * 0.6
 
-
-        // Поле для ввода фамилии
         InputField {
             id: lastNameInput
             startText: "Введите фамилию"
         }
 
-        // Поле для ввода имени
         InputField {
             id: firstNameInput
             startText: "Введите имя"
         }
 
-        // Поле для ввода отчества
         InputField {
             id: middleNameInput
             startText: "Введите отчество"
         }
 
-        // Поле для ввода email
         InputField {
             id: emailInput
             startText: "Введите адрес эл. почты"
@@ -51,7 +46,6 @@ Rectangle {
             Layout.preferredWidth: parent.width
             Layout.alignment: Qt.AlignHCenter
             name: "Завершить регистрацию"
-            anchors.top: emailInput.bottom + 30
             onClicked: {
                 databaseManager.saveUserInfo(firstNameInput.text, lastNameInput.text, middleNameInput.text, phoneNumber, emailInput.text);
                 stackView.push("../mapPage/mainMapPage.qml", {userID: databaseManager.getUserIDByPhoneNumber(phoneNumber)});

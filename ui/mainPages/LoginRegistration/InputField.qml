@@ -13,15 +13,18 @@ TextField {
     Layout.alignment: Qt.AlignHCenter
     color: mainTextColor
     font.pointSize: 14
-    leftPadding: 20
+    leftPadding: 25
     background: Rectangle {
-        implicitWidth: 200
-        implicitHeight: 40
-        radius: implicitHeight / 2
         color: "transparent"
     }
     Rectangle {
-        width: parent.width - 10
+        width: parent.width - 40
+        anchors {
+            left: parent.left
+            right: parent.right
+            leftMargin: 20
+            rightMargin: 20
+        }
         height: 1
         Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom
