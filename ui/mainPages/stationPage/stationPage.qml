@@ -46,7 +46,7 @@ Rectangle {
         Text {
             font.pointSize: 14
             leftPadding: 10
-            text: stationInfo.address + " | " + stationInfo.chargingPortsCount + " зарядных станции"
+            text: stationInfo.address + " | " + stationInfo.chargingPortsCount + " ЭЗС"
             color: mainTextColor
             anchors {
                 top: SomeIcon.top

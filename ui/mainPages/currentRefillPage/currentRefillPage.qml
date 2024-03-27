@@ -78,8 +78,8 @@ Rectangle {
                             text: modelData.address
                             color: mainTextColor
                             anchors {
-                                top: carIcon.top
-                                left: carIcon.right
+                                top: ChargeIcon.top
+                                left: ChargeIcon.right
                                 leftMargin: 5
                                 verticalCenter: parent.verticalCenter
                             }
@@ -101,8 +101,8 @@ Rectangle {
                             text: carInfo.brand + " " + carInfo.model + " (" + carInfo.licensePlate + ")"
                             color: mainTextColor
                             anchors {
-                                top: carIcon.top
-                                left: carIcon.right
+                                top: ChargeIcon.top
+                                left: ChargeIcon.right
                                 leftMargin: 5
                                 verticalCenter: parent.verticalCenter
                             }
@@ -124,8 +124,8 @@ Rectangle {
                             color: mainTextColor
 
                             anchors {
-                                top: carIcon.top
-                                left: carIcon.right
+                                top: ChargeIcon.top
+                                left: ChargeIcon.right
                                 leftMargin: 5
                                 verticalCenter: parent.verticalCenter
                             }

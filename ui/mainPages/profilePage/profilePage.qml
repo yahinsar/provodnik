@@ -203,8 +203,8 @@ Rectangle {
                         color: mainTextColor
 
                         anchors {
-                            top: carIcon.top
-                            left: carIcon.right
+                            top: CarIcon.top
+                            left: CarIcon.right
                             leftMargin: 5
                             verticalCenter: parent.verticalCenter
                         }

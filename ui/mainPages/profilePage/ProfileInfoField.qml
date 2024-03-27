@@ -33,7 +33,6 @@ TextField {
             rightMargin: 20
         }
         height: 1
-        Layout.alignment: parent.AlignHCenter
         anchors.bottom: parent.bottom
         color: mainAppColor
     }
