@@ -7,6 +7,7 @@ import "../../../ui/BottomBar"
 import "../../../ui/MapRect"
 
 Rectangle {
+    id: rootRect
     width: parent.width
     height: parent.height
     property color mainAppColor: "#6fda9c"
@@ -16,15 +17,22 @@ Rectangle {
     property int userID: 0
     property alias routeQuery: routeQuery
     property alias routeModel: routeModel
+    property var stationCoordinates: []
 
     Plugin {
         id: mapPlugin
         name: "osm"
     }
 
-    //MapView {}
     MapRect {
         id: map
+
+        MapItemView {
+            parent: map
+            model: routeModel
+            delegate: routeDelegate
+            autoFitViewport: true // Отключаем автоматическое выравнивание
+        }
 
         StationMarker {
             coordinate: QtPositioning.coordinate(51.526777, 46.017251)
@@ -45,43 +53,21 @@ Rectangle {
             coordinate: userCoordinate
         }
 
-        MapPolyline {
-            id: routePolyline
-            line.color: "green"
-            line.width: 3
-            visible: false
-        }
-
-        function calculateRoute(startCoordinate, endCoordinate) {
+        function calculateMarkerRoute()
+        {
             routeQuery.clearWaypoints();
-            routeQuery.addWaypoint(startCoordinate);
-            routeQuery.addWaypoint(endCoordinate);
-            routeQuery.travelModes = RouteQuery.CarTravel;
-            routeQuery.routeOptimizations = RouteQuery.FastestRoute;
+            routeQuery.addWaypoint(findClosestStation(userCoordinate));
+            routeQuery.addWaypoint(userCoordinate);
+            routeQuery.travelModes = RouteQuery.CarTravel
+            routeQuery.routeOptimizations = RouteQuery.ShortestRoute
+
             routeModel.update();
         }
 
-        RouteModel {
-            id: routeModel
-            plugin: mapPlugin
-            query: RouteQuery {
-                id: routeQuery
-            }
-            onStatusChanged: {
-                if (status === RouteModel.Ready) {
-                    switch (count) {
-                        case 0:
-                            // Технически это не ошибка
-                            console.log("No route found");
-                            break;
-                        case 1:
-                            console.log("Route found");
-                            break;
-                    }
-                } else if (status === RouteModel.Error) {
-                    console.log("Error finding route");
-                }
-            }
+        function clearMarkerRoute()
+        {
+            routeQuery.clearWaypoints();
+            routeModel.reset();
         }
 
         MapItemView {
@@ -91,13 +77,46 @@ Rectangle {
             autoFitViewport: true
         }
 
+        MapItemView {
+            model: routeModel
+            delegate: routeDelegate
+        }
+
+        RouteModel {
+            id: routeModel
+            plugin : map.plugin
+            query:  RouteQuery {
+                id: routeQuery
+            }
+            onStatusChanged: {
+            }
+        }
+
+        Component {
+            id: routeDelegate
+
+            MapRoute {
+                id: route
+                route: routeData
+                line.color: mainAppColor
+                line.width: 5
+                smooth: true
+                opacity: 0.8
+                TapHandler {
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+                }
+            }
+        }
+
     }
+
+    property var mapRectObject: map;
+
     BottomBar {
         MapBottomBarButtonsRow {
 
         }
     }
-    //RouteCoordinateForm { }
 
     PositionSource {
         id: positionSource
@@ -110,21 +129,27 @@ Rectangle {
         }
     }
 
-    function findClosestBlueMarker(userCoordinate) {
-        var closestMarker = null;
+    function findClosestStation(userCoordinate) {
+        var closestStation = null;
         var closestDistance = Infinity;
 
-        for (var i = 0; i < map.markers.length; i++) {
-            var marker = map.markers[i];
-            if (marker.sourceItem.source === "icons/station_marker.png") {
-                var distance = userCoordinate.distanceTo(marker.coordinate);
-                if (distance < closestDistance) {
-                    closestMarker = marker;
-                    closestDistance = distance;
-                }
+        for (var i = 0; i < stationCoordinates.length; i++) {
+            var stationCoord = stationCoordinates[i];
+            var distance = userCoordinate.distanceTo(stationCoord);
+            if (distance < closestDistance) {
+                closestStation = stationCoord;
+                closestDistance = distance;
             }
         }
 
-        return closestMarker;
+        return closestStation;
+    }
+
+    Component.onCompleted: {
+        stationCoordinates = databaseManager.getStationCoordinates();
+        for (var i = 0; i < stationCoordinates.length; i++) {
+            var coord = stationCoordinates[i];
+            stationCoordinates[i] = QtPositioning.coordinate(coord.latitude, coord.longitude);
+        }
     }
 }

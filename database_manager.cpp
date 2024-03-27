@@ -289,3 +289,20 @@ QVariantMap DatabaseManager::getStationInfoByID(int stationID)
 
     return stationInfo;
 }
+
+QVariantList DatabaseManager::getStationCoordinates()
+{
+    QVariantList coordinatesList;
+
+    QSqlQuery query("SELECT Latitude, Longitude FROM ElectricStations");
+    while (query.next()) {
+        double latitude = query.value(0).toDouble();
+        double longitude = query.value(1).toDouble();
+        QVariantMap coordMap;
+        coordMap["latitude"] = latitude;
+        coordMap["longitude"] = longitude;
+        coordinatesList.append(coordMap);
+    }
+
+    return coordinatesList;
+}

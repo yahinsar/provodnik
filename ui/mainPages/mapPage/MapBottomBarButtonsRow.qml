@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtPositioning 5.15
 import "../../BottomBar"
-
+import "../../MapRect"
 Row {
 
     id: bottomBarButtonsRow
@@ -12,6 +12,9 @@ Row {
     property color pressedButtonColor: "#297F4B"
     property color hoveredButtonColor: "#35B166"
     property color mainButtonColor: "#6fda9c"
+    property bool isVisibleRoute: false
+    property var myCenter: map.center;
+    property int myZoom: map.zoomLevel;
     BottomBarButton {
         text: "Исходный вид"
         icon.source: "icons/reset.png"
@@ -28,11 +31,7 @@ Row {
         onClicked: {
             visibleMyCoordinates = !visibleMyCoordinates;
             isPressed = !isPressed;
-            if (positionSource.valid)
-                userCoordinate = positionSource.position.coordinate;
-            else
-                userCoordinate = QtPositioning.coordinate(51.523118, 46.019991);
-
+            userCoordinate = QtPositioning.coordinate(51.523118, 46.019991);
             if (isPressed)
             {
                 background.color = pressedButtonColor;
@@ -49,34 +48,31 @@ Row {
         icon.source: "icons/route.png"
         property bool isPressed: false
         onClicked: {
-            // Находим ближайшую синюю метку
-            var nearestMarker = marker1;
-            var minDistance = Math.sqrt(Math.pow(marker1Item.coordinate.latitude - userLocationMarker.latitude, 2) +
-                                        Math.pow(marker1Item.coordinate.longitude - userLocationMarker.longitude, 2));
-            var markers = [marker2Item, marker3Item]; // Массив всех синих меток
+            myCenter = map.center;
+            myZoom = map.zoomLevel;
 
-            for (var i = 0; i < markers.length; ++i) {
-                var distance = Math.sqrt(Math.pow(markers[i].coordinate.latitude - userLocationMarker.latitude, 2) +
-                                         Math.pow(markers[i].coordinate.longitude - userLocationMarker.longitude, 2));
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearestMarker = markers[i];
+            if (isPressed)
+            {
+                mapRectObject.clearMarkerRoute();
+                isPressed = !isPressed;
+                isVisibleRoute = false;
+            }
+            else
+            {
+                if (mapRectObject && visibleMyCoordinates)
+                {
+                    isPressed = !isPressed;
+                    mapRectObject.calculateMarkerRoute();
+                    isVisibleRoute = true;
                 }
             }
 
-            // Строим маршрут от текущего местоположения до ближайшей метки
-            routeQuery.clearWaypoints();
-            routeQuery.addWaypoint(userCoordinate);
-            routeQuery.addWaypoint(nearestMarker.coordinate);
-            routeQuery.travelModes = RouteQuery.CarTravel;
-            routeQuery.routeOptimizations = RouteQuery.FastestRoute;
-            routeModel.update();
-            if (isPressed) {
-                        background.color = "#FFFFFF";
-                    } else {
-                        background.color = "#CCCCCC";
-                    }
-                    isPressed = !isPressed;
+            if (isPressed)
+                background.color = pressedButtonColor;
+            else
+                background.color = mainButtonColor;
+            map.center = userCoordinate;
+            map.zoomLevel = myZoom;
         }
     }
 

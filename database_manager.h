@@ -51,6 +51,7 @@ public slots:
     bool updateUserInfo(int userID, const QString &firstName, const QString &lastName,
                                          const QString &middleName, const QString &phone,
                                          const QString &email);
+    QVariantList getStationCoordinates();
 };
 
 #endif // DATABASE_MANAGER_H
