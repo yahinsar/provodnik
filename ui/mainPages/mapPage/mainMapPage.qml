@@ -31,21 +31,21 @@ Rectangle {
             parent: map
             model: routeModel
             delegate: routeDelegate
-            autoFitViewport: true // Отключаем автоматическое выравнивание
+            autoFitViewport: true
         }
 
         StationMarker {
-            coordinate: QtPositioning.coordinate(51.526777, 46.017251)
+            coordinate: QtPositioning.coordinate(51.576628, 45.973733)
             stationID: 1
         }
 
         StationMarker {
-            coordinate: QtPositioning.coordinate(51.522031, 46.019659)
+            coordinate: QtPositioning.coordinate(51.510451, 45.977341)
             stationID: 2
         }
 
         StationMarker {
-            coordinate: QtPositioning.coordinate(51.513254, 45.949231)
+            coordinate: QtPositioning.coordinate(51.582209, 46.104929)
             stationID: 3
         }
 
